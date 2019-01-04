@@ -5,21 +5,14 @@
  */
 package io.github.evolutionThroughCraft.common.arch.orchestrators;
 
-import io.github.evolutionThroughCraft.common.arch.contracts.Contract;
-import org.springframework.beans.factory.annotation.Autowired;
-
 /**
  *
  * @author dwin
  */
-public abstract class ContractOperation<Arg, Rtn, Con extends Contract<Arg>> implements Operation<Arg, Rtn> {
-    
-    @Autowired
-    private Con contract;
+public abstract class SimpleOperation<Arg, Rtn> implements Operation<Arg, Rtn> {
     
     @Override
     public Rtn run(Arg arg) {
-        contract.validate(arg);
         return perform(arg);
     }
     
