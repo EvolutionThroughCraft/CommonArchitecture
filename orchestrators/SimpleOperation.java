@@ -14,14 +14,14 @@ import org.apache.log4j.Logger;
  */
 public abstract class SimpleOperation<Arg, Rtn> implements Operation<Arg, Rtn> {
     
-    private static final Logger scribe = Logger.getLogger(SimpleOperation.class);
+    private static final Logger scribe = Logger.getLogger(Operation.class);
     
     @Override
     public Rtn run(Arg arg) {
-        getScribe().debug("perform start");
+        debug("perform start");
         Long time = System.currentTimeMillis();
         Rtn output =  perform(arg);
-        getScribe().debug("perform finish time:"+ (System.currentTimeMillis() - time));
+        debug("perform finish time:"+ (System.currentTimeMillis() - time));
         return output;
     }
     
@@ -29,5 +29,13 @@ public abstract class SimpleOperation<Arg, Rtn> implements Operation<Arg, Rtn> {
     
     protected Logger getScribe() {
         return scribe;
+    }
+    
+    protected void debug(String msg) {
+        getScribe().debug(getClass()+"::"+msg);
+    }
+    
+    protected void info(String msg) {
+        getScribe().info(getClass()+"::"+msg);
     }
 }

@@ -15,15 +15,15 @@ public abstract class ContractOperation<Arg, Rtn, Con extends Contract<Arg>> ext
     
     @Override
     public Rtn run(Arg arg) {
-        getScribe().debug("contract start");
+        debug("contract start");
         Long time = System.currentTimeMillis();        
         try {
             getContract().validate(arg);            
         } catch (Exception e) {
-            getScribe().debug("contract finish(fail) time:"+(System.currentTimeMillis() - time));
+            debug("contract finish(fail) time:"+(System.currentTimeMillis() - time));
             throw e;
         }
-        getScribe().debug("contract finish(suc) time:"+(System.currentTimeMillis() - time));
+        debug("contract finish(suc) time:"+(System.currentTimeMillis() - time));
         
         return super.run(arg);
     }
