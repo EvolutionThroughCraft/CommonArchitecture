@@ -5,7 +5,6 @@
  */
 package io.github.evolutionThroughCraft.common.arch.orchestrators;
 
-import io.github.evolutionThroughCraft.common.service.main.aop.LogTimeTaken;
 import org.apache.log4j.Logger;
 
 
@@ -19,12 +18,16 @@ public abstract class SimpleOperation<Arg, Rtn> implements Operation<Arg, Rtn> {
     
     @Override
     public Rtn run(Arg arg) {
-        scribe.debug("simple op start");
+        getScribe().debug("perform start");
         Long time = System.currentTimeMillis();
         Rtn output =  perform(arg);
-        scribe.debug("simple op run in:" + (System.currentTimeMillis() - time));
+        getScribe().debug("perform finish time:"+ (System.currentTimeMillis() - time));
         return output;
     }
     
     public abstract Rtn perform(Arg arg);
+    
+    protected Logger getScribe() {
+        return scribe;
+    }
 }
